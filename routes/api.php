@@ -14,9 +14,11 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('users', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
 });
